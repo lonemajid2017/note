@@ -1,0 +1,1922 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0" />
+  <title>Note for Insha — A Little Something I Wanted to Tell You</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@300;400;500;600&family=Plus+Jakarta+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg-deep: #07132c;
+      --bg-navy: #0f2447;
+      --bg-charcoal: #131c38;
+      --bg-indigo: #231f54;
+      --accent-indigo: #38bdf8;
+      --accent-violet: #c084fc;
+      --accent-sky: #2dd4bf;
+      --accent-gold: #fbbf24;
+      --text-primary: #f8fafc;
+      --text-secondary: #cbd5e1;
+      --text-muted: #94a3b8;
+      --glass-bg: rgba(15, 29, 58, 0.52);
+      --glass-border: rgba(186, 230, 253, 0.22);
+      --glass-highlight: rgba(56, 189, 248, 0.32);
+      --font-serif: 'Cormorant Garamond', Georgia, serif;
+      --font-sans: 'Plus Jakarta Sans', 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    html, body {
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      background-color: var(--bg-deep);
+      color: var(--text-primary);
+      font-family: var(--font-sans);
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      user-select: none;
+    }
+
+    /* Ambient Background Layer - Vibrant Live Twilight & Aurora Sky */
+    .ambient-stage {
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      overflow: hidden;
+      background:
+        radial-gradient(ellipse at 18% 15%, rgba(45, 212, 191, 0.28) 0%, transparent 52%),
+        radial-gradient(ellipse at 84% 22%, rgba(168, 85, 247, 0.32) 0%, transparent 55%),
+        radial-gradient(ellipse at 50% 92%, rgba(251, 191, 36, 0.18) 0%, rgba(56, 189, 248, 0.15) 45%, transparent 72%),
+        linear-gradient(160deg, #061024 0%, #0d2147 36%, #192f60 68%, #1e1b4b 100%);
+      transition: filter 1.8s cubic-bezier(0.22, 1, 0.36, 1), opacity 1.8s ease;
+    }
+
+    body.final-dimmed .ambient-stage {
+      filter: brightness(0.78) saturate(1.18);
+    }
+
+    /* Animated Gradient Orbs */
+    .aurora-orb {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(75px);
+      opacity: 0.68;
+      pointer-events: none;
+      will-change: transform, opacity;
+      mix-blend-mode: screen;
+      transition: all 2s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    .orb-1 {
+      width: 58vw;
+      height: 58vw;
+      min-width: 340px;
+      min-height: 340px;
+      top: -16%;
+      left: -10%;
+      background: radial-gradient(circle, rgba(45, 212, 191, 0.45) 0%, rgba(56, 189, 248, 0.22) 50%, transparent 78%);
+      animation: floatOrb1 18s ease-in-out infinite alternate;
+    }
+
+    .orb-2 {
+      width: 54vw;
+      height: 54vw;
+      min-width: 320px;
+      min-height: 320px;
+      bottom: -18%;
+      right: -10%;
+      background: radial-gradient(circle, rgba(168, 85, 247, 0.44) 0%, rgba(99, 102, 241, 0.24) 52%, transparent 80%);
+      animation: floatOrb2 22s ease-in-out infinite alternate;
+    }
+
+    .orb-3 {
+      width: 44vw;
+      height: 44vw;
+      min-width: 260px;
+      min-height: 260px;
+      top: 28%;
+      left: 30%;
+      background: radial-gradient(circle, rgba(251, 191, 36, 0.24) 0%, rgba(56, 189, 248, 0.22) 55%, transparent 80%);
+      animation: floatOrb3 15s ease-in-out infinite alternate;
+    }
+
+    /* Special Final Screen Halo */
+    .final-halo {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      width: min(680px, 92vw);
+      height: min(680px, 92vw);
+      transform: translate(-50%, -50%) scale(0.85);
+      border-radius: 50%;
+      background: radial-gradient(
+        circle,
+        rgba(129, 140, 248, 0.18) 0%,
+        rgba(167, 139, 250, 0.1) 38%,
+        rgba(56, 189, 248, 0.04) 65%,
+        transparent 80%
+      );
+      filter: blur(50px);
+      opacity: 0;
+      pointer-events: none;
+      z-index: 1;
+      transition: opacity 2.2s ease, transform 2.6s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    body.final-dimmed .final-halo {
+      opacity: 1;
+      transform: translate(-50%, -50%) scale(1.05);
+      animation: haloPulse 8s ease-in-out infinite alternate;
+    }
+
+    @keyframes haloPulse {
+      0% { transform: translate(-50%, -50%) scale(0.96); opacity: 0.78; }
+      100% { transform: translate(-50%, -50%) scale(1.1); opacity: 1; }
+    }
+
+    @keyframes floatOrb1 {
+      0% { transform: translate(0, 0) scale(1); }
+      50% { transform: translate(6vw, 4vh) scale(1.08); }
+      100% { transform: translate(-3vw, 8vh) scale(0.95); }
+    }
+
+    @keyframes floatOrb2 {
+      0% { transform: translate(0, 0) scale(1); }
+      50% { transform: translate(-7vw, -5vh) scale(1.06); }
+      100% { transform: translate(4vw, -9vh) scale(0.94); }
+    }
+
+    @keyframes floatOrb3 {
+      0% { transform: translate(0, 0) scale(0.95); }
+      50% { transform: translate(-5vw, 6vh) scale(1.1); }
+      100% { transform: translate(6vw, -4vh) scale(1); }
+    }
+
+    /* Subtle Geometric Floating Ring Elements */
+    .floating-ring {
+      position: fixed;
+      border-radius: 50%;
+      border: 1px solid rgba(148, 163, 184, 0.06);
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    .ring-1 {
+      width: min(560px, 85vw);
+      height: min(560px, 85vw);
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      animation: slowRotate 90s linear infinite;
+    }
+
+    .ring-2 {
+      width: min(760px, 115vw);
+      height: min(760px, 115vw);
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      border-color: rgba(129, 140, 248, 0.045);
+      animation: slowRotateReverse 120s linear infinite;
+    }
+
+    @keyframes slowRotate {
+      from { transform: translate(-50%, -50%) rotate(0deg); }
+      to { transform: translate(-50%, -50%) rotate(360deg); }
+    }
+
+    @keyframes slowRotateReverse {
+      from { transform: translate(-50%, -50%) rotate(360deg); }
+      to { transform: translate(-50%, -50%) rotate(0deg); }
+    }
+
+    /* Particle Canvas */
+    #particleCanvas {
+      position: fixed;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 1;
+      pointer-events: none;
+    }
+
+    /* Subtle Vignette & Luminous Horizon Overlay */
+    .vignette-overlay {
+      position: fixed;
+      inset: 0;
+      z-index: 2;
+      pointer-events: none;
+      background:
+        radial-gradient(circle at 50% 45%, transparent 52%, rgba(4, 10, 24, 0.42) 100%),
+        linear-gradient(to top, rgba(45, 212, 191, 0.06) 0%, transparent 30%);
+    }
+
+    /* Top Minimal Header Bar */
+    .top-bar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 20;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1.25rem 1.5rem;
+      pointer-events: none;
+    }
+
+    .brand-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.55rem;
+      padding: 0.42rem 0.85rem;
+      border-radius: 999px;
+      background: rgba(15, 23, 42, 0.52);
+      border: 1px solid rgba(148, 163, 184, 0.12);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      font-size: 0.75rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--text-secondary);
+      pointer-events: auto;
+    }
+
+    .status-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--accent-indigo);
+      box-shadow: 0 0 10px var(--accent-indigo);
+      animation: dotPulse 3s ease-in-out infinite;
+    }
+
+    @keyframes dotPulse {
+      0%, 100% { opacity: 0.45; transform: scale(0.9); }
+      50% { opacity: 1; transform: scale(1.15); }
+    }
+
+    .top-controls {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      pointer-events: auto;
+    }
+
+    .icon-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      padding: 0.44rem 0.8rem;
+      border-radius: 999px;
+      background: rgba(15, 23, 42, 0.52);
+      border: 1px solid rgba(148, 163, 184, 0.14);
+      color: var(--text-secondary);
+      font-family: var(--font-sans);
+      font-size: 0.75rem;
+      font-weight: 500;
+      cursor: pointer;
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      transition: all 0.25s ease;
+    }
+
+    .icon-btn:hover, .icon-btn:focus-visible {
+      color: var(--text-primary);
+      border-color: rgba(167, 139, 250, 0.38);
+      background: rgba(30, 41, 59, 0.68);
+      outline: none;
+    }
+
+    .icon-btn.active {
+      color: #e0e7ff;
+      border-color: rgba(129, 140, 248, 0.45);
+      background: rgba(49, 46, 129, 0.42);
+      box-shadow: 0 0 16px rgba(99, 102, 241, 0.18);
+    }
+
+    .icon-btn svg {
+      width: 14px;
+      height: 14px;
+      stroke: currentColor;
+      stroke-width: 1.8;
+      fill: none;
+    }
+
+    /* Main Stage Layout */
+    .stage-container {
+      position: relative;
+      z-index: 10;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 4.5rem 1.35rem 5.5rem;
+    }
+
+    /* Screens (Welcome, Message Reader, Final Screen) */
+    .screen-panel {
+      width: 100%;
+      max-width: 680px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      transition: opacity 0.85s cubic-bezier(0.22, 1, 0.36, 1),
+                  transform 0.85s cubic-bezier(0.22, 1, 0.36, 1),
+                  filter 0.85s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    .screen-panel.hidden {
+      display: none !important;
+    }
+
+    /* Welcome Screen Styling */
+    .welcome-card {
+      position: relative;
+      padding: 3.2rem 2.2rem;
+      border-radius: 28px;
+      background: linear-gradient(155deg, rgba(17, 34, 68, 0.62) 0%, rgba(12, 22, 48, 0.74) 100%);
+      border: 1px solid rgba(125, 211, 252, 0.26);
+      box-shadow:
+        0 25px 65px -15px rgba(3, 8, 22, 0.68),
+        0 0 55px rgba(56, 189, 248, 0.16),
+        inset 0 1px 0 rgba(255, 255, 255, 0.18);
+      backdrop-filter: blur(22px);
+      -webkit-backdrop-filter: blur(22px);
+      width: 100%;
+      max-width: 580px;
+      animation: welcomeEntrance 1.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+
+    @keyframes welcomeEntrance {
+      from {
+        opacity: 0;
+        transform: translateY(22px) scale(0.97);
+        filter: blur(10px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+        filter: blur(0);
+      }
+    }
+
+    .welcome-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.74rem;
+      text-transform: uppercase;
+      letter-spacing: 0.2em;
+      color: var(--accent-indigo);
+      margin-bottom: 1.5rem;
+      font-weight: 500;
+      opacity: 0.9;
+    }
+
+    .welcome-title {
+      font-family: var(--font-serif);
+      font-size: clamp(2rem, 5vw, 3.1rem);
+      font-weight: 400;
+      line-height: 1.25;
+      letter-spacing: -0.01em;
+      color: #f8fafc;
+      margin-bottom: 2.4rem;
+      text-shadow: 0 4px 28px rgba(129, 140, 248, 0.18);
+    }
+
+    .primary-cta {
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.7rem;
+      padding: 0.95rem 2.35rem;
+      border-radius: 999px;
+      background: linear-gradient(135deg, rgba(79, 70, 229, 0.32) 0%, rgba(124, 58, 237, 0.24) 100%);
+      border: 1px solid rgba(167, 139, 250, 0.42);
+      color: #f8fafc;
+      font-family: var(--font-sans);
+      font-size: 0.96rem;
+      font-weight: 500;
+      letter-spacing: 0.04em;
+      cursor: pointer;
+      overflow: hidden;
+      box-shadow:
+        0 10px 30px -5px rgba(79, 70, 229, 0.32),
+        inset 0 1px 0 rgba(255, 255, 255, 0.18);
+      transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1),
+                  box-shadow 0.35s cubic-bezier(0.22, 1, 0.36, 1),
+                  border-color 0.35s ease,
+                  background 0.35s ease;
+    }
+
+    .primary-cta::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.14), transparent);
+      animation: shimmerSweep 3.8s infinite;
+    }
+
+    @keyframes shimmerSweep {
+      0% { left: -100%; }
+      55%, 100% { left: 100%; }
+    }
+
+    .primary-cta:hover, .primary-cta:focus-visible {
+      transform: translateY(-2px) scale(1.02);
+      border-color: rgba(196, 181, 253, 0.75);
+      background: linear-gradient(135deg, rgba(99, 102, 241, 0.45) 0%, rgba(139, 92, 246, 0.36) 100%);
+      box-shadow:
+        0 14px 36px -5px rgba(99, 102, 241, 0.45),
+        0 0 22px rgba(167, 139, 250, 0.28);
+      outline: none;
+    }
+
+    .primary-cta:active {
+      transform: translateY(0) scale(0.99);
+    }
+
+    .primary-cta svg {
+      width: 16px;
+      height: 16px;
+      stroke: currentColor;
+      stroke-width: 2;
+      fill: none;
+      transition: transform 0.3s ease;
+    }
+
+    .primary-cta:hover svg {
+      transform: translateX(3px);
+    }
+
+    /* Message Card Styling */
+    .message-card {
+      position: relative;
+      width: 100%;
+      min-height: 270px;
+      padding: clamp(2rem, 5vw, 3.4rem) clamp(1.5rem, 4.5vw, 3.1rem);
+      border-radius: 28px;
+      background: linear-gradient(160deg, rgba(16, 33, 66, 0.62) 0%, rgba(11, 21, 46, 0.76) 100%);
+      border: 1px solid rgba(125, 211, 252, 0.25);
+      box-shadow:
+        0 24px 64px -16px rgba(2, 8, 22, 0.7),
+        0 0 50px rgba(45, 212, 191, 0.13),
+        inset 0 1px 0 rgba(255, 255, 255, 0.16);
+      backdrop-filter: blur(24px);
+      -webkit-backdrop-filter: blur(24px);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+
+    /* Subtle top edge highlight */
+    .message-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 10%;
+      right: 10%;
+      height: 1.5px;
+      background: linear-gradient(90deg, transparent, rgba(45, 212, 191, 0.65), rgba(251, 191, 36, 0.55), rgba(192, 132, 252, 0.65), transparent);
+    }
+
+    .message-step-badge {
+      font-size: 0.72rem;
+      font-weight: 500;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--accent-indigo);
+      margin-bottom: 1.4rem;
+      opacity: 0.85;
+    }
+
+    .message-body {
+      font-family: var(--font-sans);
+      font-size: clamp(1.15rem, 2.7vw, 1.5rem);
+      font-weight: 300;
+      line-height: 1.72;
+      letter-spacing: 0.01em;
+      color: #f1f5f9;
+      max-width: 560px;
+      text-align: center;
+      min-height: 4.8em;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+    }
+
+    .message-body-inner {
+      display: inline;
+    }
+
+    /* Character / Word Typing Span Transitions */
+    .char-token {
+      opacity: 0;
+      filter: blur(4px);
+      transition: opacity 0.28s ease, filter 0.28s ease;
+    }
+
+    .char-token.revealed {
+      opacity: 1;
+      filter: blur(0);
+    }
+
+    /* Subtle Typing Cursor */
+    .typing-cursor {
+      display: inline-block;
+      width: 2px;
+      height: 1.1em;
+      vertical-align: text-bottom;
+      margin-left: 3px;
+      background: var(--accent-violet);
+      box-shadow: 0 0 8px var(--accent-violet);
+      animation: cursorBlink 0.9s ease-in-out infinite;
+    }
+
+    .typing-cursor.done {
+      opacity: 0;
+      animation: none;
+      transition: opacity 0.4s ease;
+    }
+
+    @keyframes cursorBlink {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.2; }
+    }
+
+    /* Reading Timer Line inside Card Bottom */
+    .reading-timer-track {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background: rgba(148, 163, 184, 0.08);
+      overflow: hidden;
+    }
+
+    .reading-timer-fill {
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(90deg, var(--accent-indigo), var(--accent-violet), var(--accent-sky));
+      box-shadow: 0 0 10px rgba(129, 140, 248, 0.6);
+      transition: width 0.1s linear;
+    }
+
+    /* Distinct Entrance / Exit Animation Variants for Messages */
+    .anim-wrapper {
+      width: 100%;
+      transition: opacity 0.72s cubic-bezier(0.22, 1, 0.36, 1),
+                  transform 0.72s cubic-bezier(0.22, 1, 0.36, 1),
+                  filter 0.72s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    /* Variant 1: Smooth Fade & Soft Blur */
+    .anim-fade-blur-enter {
+      opacity: 0;
+      filter: blur(12px);
+      transform: scale(0.98);
+    }
+    /* Variant 2: Gentle Upward Drift */
+    .anim-upward-enter {
+      opacity: 0;
+      filter: blur(6px);
+      transform: translateY(26px);
+    }
+    /* Variant 3: Focus Depth Scale */
+    .anim-depth-enter {
+      opacity: 0;
+      filter: blur(14px);
+      transform: scale(1.04);
+    }
+    /* Variant 4: Subtle Horizon Glide */
+    .anim-glide-enter {
+      opacity: 0;
+      filter: blur(8px);
+      transform: translateY(14px) scale(0.96);
+    }
+
+    .anim-active {
+      opacity: 1;
+      filter: blur(0);
+      transform: translateY(0) scale(1);
+    }
+
+    .anim-exit {
+      opacity: 0;
+      filter: blur(10px);
+      transform: translateY(-16px) scale(0.98);
+    }
+
+    /* Bottom Controls & Progress Indicator */
+    .bottom-hud {
+      margin-top: 1.75rem;
+      width: 100%;
+      max-width: 560px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1.1rem;
+    }
+
+    .nav-controls-row {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.85rem;
+      width: 100%;
+    }
+
+    .secondary-nav-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.45rem;
+      padding: 0.62rem 1.15rem;
+      border-radius: 999px;
+      background: rgba(15, 23, 42, 0.55);
+      border: 1px solid rgba(148, 163, 184, 0.16);
+      color: var(--text-secondary);
+      font-family: var(--font-sans);
+      font-size: 0.82rem;
+      font-weight: 500;
+      cursor: pointer;
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      transition: all 0.25s ease;
+    }
+
+    .secondary-nav-btn:hover:not(:disabled),
+    .secondary-nav-btn:focus-visible:not(:disabled) {
+      color: var(--text-primary);
+      border-color: rgba(148, 163, 184, 0.35);
+      background: rgba(30, 41, 59, 0.72);
+      outline: none;
+    }
+
+    .secondary-nav-btn:disabled {
+      opacity: 0.32;
+      cursor: not-allowed;
+    }
+
+    .next-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.55rem;
+      padding: 0.68rem 1.65rem;
+      border-radius: 999px;
+      background: linear-gradient(135deg, rgba(79, 70, 229, 0.3) 0%, rgba(124, 58, 237, 0.22) 100%);
+      border: 1px solid rgba(167, 139, 250, 0.38);
+      color: #f8fafc;
+      font-family: var(--font-sans);
+      font-size: 0.86rem;
+      font-weight: 500;
+      letter-spacing: 0.03em;
+      cursor: pointer;
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      box-shadow: 0 8px 24px -6px rgba(79, 70, 229, 0.32);
+      transition: all 0.28s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    .next-btn:hover, .next-btn:focus-visible {
+      transform: translateY(-1px);
+      border-color: rgba(196, 181, 253, 0.7);
+      background: linear-gradient(135deg, rgba(99, 102, 241, 0.44) 0%, rgba(139, 92, 246, 0.34) 100%);
+      box-shadow: 0 12px 28px -6px rgba(99, 102, 241, 0.45);
+      outline: none;
+    }
+
+    .next-btn svg, .secondary-nav-btn svg {
+      width: 15px;
+      height: 15px;
+      stroke: currentColor;
+      stroke-width: 2;
+      fill: none;
+    }
+
+    /* Progress Dots & Remaining Counter */
+    .progress-cluster {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.55rem;
+    }
+
+    .dots-row {
+      display: flex;
+      align-items: center;
+      gap: 0.42rem;
+    }
+
+    .progress-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 999px;
+      background: rgba(148, 163, 184, 0.25);
+      border: none;
+      padding: 0;
+      cursor: pointer;
+      transition: all 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    .progress-dot.completed {
+      background: rgba(129, 140, 248, 0.55);
+    }
+
+    .progress-dot.active {
+      width: 22px;
+      background: linear-gradient(90deg, var(--accent-indigo), var(--accent-violet));
+      box-shadow: 0 0 10px rgba(129, 140, 248, 0.6);
+    }
+
+    .progress-label {
+      font-size: 0.74rem;
+      color: var(--text-muted);
+      letter-spacing: 0.05em;
+    }
+
+    /* Final Screen Special Design */
+    .final-card {
+      position: relative;
+      width: 100%;
+      max-width: 650px;
+      padding: clamp(2.2rem, 5.5vw, 3.6rem) clamp(1.6rem, 4.5vw, 3.2rem);
+      border-radius: 30px;
+      background: linear-gradient(165deg, rgba(12, 18, 38, 0.76) 0%, rgba(6, 9, 20, 0.88) 100%);
+      border: 1px solid rgba(167, 139, 250, 0.24);
+      box-shadow:
+        0 30px 80px -15px rgba(0, 0, 0, 0.88),
+        0 0 65px rgba(129, 140, 248, 0.14),
+        inset 0 1px 0 rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(26px);
+      -webkit-backdrop-filter: blur(26px);
+      text-align: center;
+      opacity: 0;
+      transform: translateY(18px) scale(0.98);
+      filter: blur(10px);
+      transition: opacity 1.5s cubic-bezier(0.16, 1, 0.3, 1),
+                  transform 1.5s cubic-bezier(0.16, 1, 0.3, 1),
+                  filter 1.5s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .final-card.revealed {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+      filter: blur(0);
+    }
+
+    .final-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 10%;
+      right: 10%;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(167, 139, 250, 0.65), rgba(56, 189, 248, 0.5), transparent);
+    }
+
+    .final-paragraphs {
+      display: flex;
+      flex-direction: column;
+      gap: 1.25rem;
+      margin-bottom: 2.2rem;
+    }
+
+    .final-p {
+      font-family: var(--font-sans);
+      font-size: clamp(1.08rem, 2.5vw, 1.32rem);
+      font-weight: 300;
+      line-height: 1.7;
+      color: #e2e8f0;
+      opacity: 0;
+      transform: translateY(10px);
+      transition: opacity 0.9s ease, transform 0.9s ease;
+    }
+
+    .final-p.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .final-divider {
+      width: 64px;
+      height: 1px;
+      margin: 0 auto 2rem;
+      background: linear-gradient(90deg, transparent, rgba(167, 139, 250, 0.55), transparent);
+    }
+
+    .closing-quote {
+      font-family: var(--font-serif);
+      font-style: italic;
+      font-size: clamp(1.45rem, 3.6vw, 2.05rem);
+      font-weight: 400;
+      line-height: 1.42;
+      color: #ffffff;
+      text-shadow: 0 0 28px rgba(167, 139, 250, 0.35);
+      margin-bottom: 2.2rem;
+      opacity: 0;
+      transform: translateY(10px);
+      transition: opacity 1.2s ease, transform 1.2s ease;
+    }
+
+    .closing-quote.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .final-actions {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      margin-bottom: 1.9rem;
+      opacity: 0;
+      transition: opacity 1s ease;
+    }
+
+    .final-actions.show {
+      opacity: 1;
+    }
+
+    .made-with-care {
+      font-size: 0.76rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      opacity: 0.85;
+    }
+
+    /* All Messages Modal Drawer (for reviewing all screens anytime at the end) */
+    .modal-backdrop {
+      position: fixed;
+      inset: 0;
+      z-index: 50;
+      background: rgba(3, 6, 15, 0.82);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 1.25rem;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.35s ease;
+    }
+
+    .modal-backdrop.open {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .modal-sheet {
+      width: 100%;
+      max-width: 620px;
+      max-height: 82vh;
+      border-radius: 24px;
+      background: rgba(11, 17, 34, 0.95);
+      border: 1px solid rgba(148, 163, 184, 0.18);
+      box-shadow: 0 25px 70px rgba(0, 0, 0, 0.85);
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+
+    .modal-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1.15rem 1.5rem;
+      border-bottom: 1px solid rgba(148, 163, 184, 0.12);
+    }
+
+    .modal-title {
+      font-family: var(--font-serif);
+      font-size: 1.35rem;
+      color: #f8fafc;
+      font-weight: 500;
+    }
+
+    .modal-list {
+      padding: 1.25rem 1.5rem;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 0.9rem;
+    }
+
+    .modal-note-item {
+      padding: 1rem 1.15rem;
+      border-radius: 16px;
+      background: rgba(15, 23, 42, 0.65);
+      border: 1px solid rgba(148, 163, 184, 0.1);
+      text-align: left;
+    }
+
+    .modal-note-num {
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--accent-indigo);
+      margin-bottom: 0.35rem;
+    }
+
+    .modal-note-text {
+      font-size: 0.95rem;
+      line-height: 1.6;
+      color: #e2e8f0;
+      font-weight: 300;
+    }
+
+    /* Accessibility: Reduced Motion Support */
+    @media (prefers-reduced-motion: reduce) {
+      .aurora-orb,
+      .floating-ring,
+      .status-dot,
+      .primary-cta::before,
+      .typing-cursor {
+        animation: none !important;
+      }
+      .anim-wrapper,
+      .screen-panel,
+      .final-card,
+      .final-p,
+      .closing-quote,
+      .char-token {
+        transition-duration: 0.05s !important;
+        filter: none !important;
+        transform: none !important;
+      }
+    }
+
+    body.reduced-motion .aurora-orb,
+    body.reduced-motion .floating-ring,
+    body.reduced-motion .status-dot,
+    body.reduced-motion .primary-cta::before,
+    body.reduced-motion .typing-cursor {
+      animation: none !important;
+    }
+
+    body.reduced-motion .anim-wrapper,
+    body.reduced-motion .screen-panel,
+    body.reduced-motion .final-card,
+    body.reduced-motion .final-p,
+    body.reduced-motion .closing-quote,
+    body.reduced-motion .char-token {
+      transition-duration: 0.05s !important;
+      filter: none !important;
+      transform: none !important;
+    }
+
+    /* Mobile Responsive Optimizations */
+    @media (max-width: 600px) {
+      .top-bar {
+        padding: 0.9rem 1rem;
+      }
+      .brand-pill {
+        font-size: 0.7rem;
+        padding: 0.38rem 0.72rem;
+      }
+      .welcome-card {
+        padding: 2.5rem 1.5rem;
+      }
+      .message-card {
+        min-height: 250px;
+        padding: 1.85rem 1.35rem;
+      }
+      .final-card {
+        padding: 2rem 1.35rem;
+      }
+      .stage-container {
+        padding: 4rem 1rem 4.5rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Cinematic Background & Lighting -->
+  <div class="ambient-stage" aria-hidden="true">
+    <div class="aurora-orb orb-1"></div>
+    <div class="aurora-orb orb-2"></div>
+    <div class="aurora-orb orb-3"></div>
+  </div>
+  <div class="final-halo" aria-hidden="true"></div>
+  <div class="floating-ring ring-1" aria-hidden="true"></div>
+  <div class="floating-ring ring-2" aria-hidden="true"></div>
+  <canvas id="particleCanvas" aria-hidden="true"></canvas>
+  <div class="vignette-overlay" aria-hidden="true"></div>
+
+  <!-- Minimal Top Navigation & Experience Controls -->
+  <header class="top-bar">
+    <div class="brand-pill">
+      <span class="status-dot"></span>
+      <span>Note for Insha</span>
+    </div>
+    <div class="top-controls">
+      <button type="button" id="autoPlayBtn" class="icon-btn active" title="Toggle automatic message progression" aria-pressed="true">
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <circle cx="12" cy="12" r="9"></circle>
+          <polyline points="12 7 12 12 15 15"></polyline>
+        </svg>
+        <span id="autoPlayLabel">Auto: On</span>
+      </button>
+      <button type="button" id="soundToggleBtn" class="icon-btn" title="Toggle soft ambient sound" aria-pressed="false">
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
+          <path d="M15.54 8.46a5 5 0 0 1 0 7.07"></path>
+        </svg>
+        <span id="soundToggleLabel">Chime: Off</span>
+      </button>
+    </div>
+  </header>
+
+  <!-- Center Interactive Stage -->
+  <main class="stage-container">
+    <!-- 1. Opening Welcome Screen -->
+    <section id="welcomeScreen" class="screen-panel" aria-label="Welcome Screen">
+      <div class="welcome-card">
+        <div class="welcome-eyebrow">Note for Insha</div>
+        <h1 class="welcome-title">Hey Insha, a little something I wanted to tell you.</h1>
+        <button type="button" id="openBtn" class="primary-cta">
+          <span>Open this</span>
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <line x1="5" y1="12" x2="19" y2="12"></line>
+            <polyline points="12 5 19 12 12 19"></polyline>
+          </svg>
+        </button>
+      </div>
+    </section>
+
+    <!-- 2. Individual Message Experience Screen -->
+    <section id="messageScreen" class="screen-panel hidden" aria-live="polite" aria-label="Message Sequence">
+      <div id="animWrapper" class="anim-wrapper anim-active">
+        <div id="messageCard" class="message-card" title="Tap to reveal full text immediately">
+          <div id="messageBadge" class="message-step-badge">Note 01</div>
+          <div id="messageBody" class="message-body">
+            <div class="message-body-inner">
+              <span id="typedContainer"></span><span id="typingCursor" class="typing-cursor"></span>
+            </div>
+          </div>
+          <div class="reading-timer-track" aria-hidden="true">
+            <div id="readingTimerFill" class="reading-timer-fill"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="bottom-hud">
+        <div class="nav-controls-row">
+          <button type="button" id="prevBtn" class="secondary-nav-btn" aria-label="Previous message">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <polyline points="15 18 9 12 15 6"></polyline>
+            </svg>
+            <span>Back</span>
+          </button>
+          <button type="button" id="nextBtn" class="next-btn" aria-label="Next message">
+            <span id="nextBtnText">Next</span>
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <polyline points="9 18 15 12 9 6"></polyline>
+            </svg>
+          </button>
+        </div>
+
+        <div class="progress-cluster">
+          <div id="dotsRow" class="dots-row" role="tablist" aria-label="Message progress steps"></div>
+          <div id="progressText" class="progress-label">1 of 10 · 9 messages remaining</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 3. Final Screen -->
+    <section id="finalScreen" class="screen-panel hidden" aria-live="polite" aria-label="Closing Message">
+      <div id="finalCard" class="final-card">
+        <div class="welcome-eyebrow">Always Welcome, Insha</div>
+        <div class="final-paragraphs">
+          <p id="finalP1" class="final-p">I don't know if you realise this, but I really enjoy having you around, Insha.</p>
+          <p id="finalP2" class="final-p">So please, never feel that you have to wait for the perfect time to talk to me.</p>
+          <p id="finalP3" class="final-p">I'd always be happy to hear from you.</p>
+        </div>
+        <div class="final-divider" aria-hidden="true"></div>
+        <blockquote id="closingQuote" class="closing-quote">
+          “Some conversations are worth making time for. And yours is one of them.”
+        </blockquote>
+        <div id="finalActions" class="final-actions">
+          <button type="button" id="replayBtn" class="secondary-nav-btn">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <polyline points="1 4 1 10 7 10"></polyline>
+              <path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"></path>
+            </svg>
+            <span>Replay from start</span>
+          </button>
+          <button type="button" id="readAllBtn" class="secondary-nav-btn">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <line x1="8" y1="6" x2="21" y2="6"></line>
+              <line x1="8" y1="12" x2="21" y2="12"></line>
+              <line x1="8" y1="18" x2="21" y2="18"></line>
+              <line x1="3" y1="6" x2="3.01" y2="6"></line>
+              <line x1="3" y1="12" x2="3.01" y2="12"></line>
+              <line x1="3" y1="18" x2="3.01" y2="18"></line>
+            </svg>
+            <span>View all notes</span>
+          </button>
+        </div>
+        <div class="made-with-care">Made with care · Note for Insha</div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Modal Drawer to Read All Notes at Once -->
+  <div id="allNotesModal" class="modal-backdrop" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+    <div class="modal-sheet">
+      <div class="modal-header">
+        <h2 id="modalTitle" class="modal-title">Every Note</h2>
+        <button type="button" id="closeModalBtn" class="secondary-nav-btn">Close</button>
+      </div>
+      <div id="modalList" class="modal-list"></div>
+    </div>
+  </div>
+
+  <script>
+    (function () {
+      'use strict';
+
+      // Messages personalized for Insha
+      const MESSAGES = [
+        "Hey Insha, there's something I wanted to tell you.",
+        "I genuinely look forward to your texts. You probably don't even realise how much I do.",
+        "Today, you called me so many times, and I really wanted to talk to you. But I was caught up with some work, and my phone was low on battery. I told you it would take an hour, but things took longer than I expected.",
+        "Even while I was busy, I kept thinking, I wish this work hadn't come up right now. I wish I could just talk to you properly.",
+        "Honestly, Insha, I felt really bad when I couldn't talk to you today. I can't properly explain how much I wanted to.",
+        "You know what? I keep looking for reels just to find something that I can send you. Sometimes I come across something and immediately think, 'Insha would enjoy this.'",
+        "I genuinely want to talk to you properly, every time. I never want you to feel like you're disturbing me or that you're texting at the wrong time.",
+        "And I wish you could always talk to me freely too. Without overthinking, without hesitation, and without worrying about what I'll think.",
+        "Whenever you feel like texting me, just do it. Whether it's morning, midnight, or after a long gap. You don't have to think twice.",
+        "Because, to be honest, Insha, whenever your notification pops up, it makes me genuinely happy. Sometimes, even the smallest message from you can make my entire day better."
+      ];
+
+      // Different subtle entrance animation classes cycled per message
+      const ENTRANCE_VARIANTS = [
+        'anim-fade-blur-enter',
+        'anim-upward-enter',
+        'anim-depth-enter',
+        'anim-glide-enter'
+      ];
+
+      // DOM Elements
+      const welcomeScreen = document.getElementById('welcomeScreen');
+      const messageScreen = document.getElementById('messageScreen');
+      const finalScreen = document.getElementById('finalScreen');
+      const openBtn = document.getElementById('openBtn');
+      const prevBtn = document.getElementById('prevBtn');
+      const nextBtn = document.getElementById('nextBtn');
+      const nextBtnText = document.getElementById('nextBtnText');
+      const animWrapper = document.getElementById('animWrapper');
+      const messageCard = document.getElementById('messageCard');
+      const messageBadge = document.getElementById('messageBadge');
+      const typedContainer = document.getElementById('typedContainer');
+      const typingCursor = document.getElementById('typingCursor');
+      const readingTimerFill = document.getElementById('readingTimerFill');
+      const dotsRow = document.getElementById('dotsRow');
+      const progressText = document.getElementById('progressText');
+      const autoPlayBtn = document.getElementById('autoPlayBtn');
+      const autoPlayLabel = document.getElementById('autoPlayLabel');
+      const soundToggleBtn = document.getElementById('soundToggleBtn');
+      const soundToggleLabel = document.getElementById('soundToggleLabel');
+
+      // Final screen elements
+      const finalCard = document.getElementById('finalCard');
+      const finalP1 = document.getElementById('finalP1');
+      const finalP2 = document.getElementById('finalP2');
+      const finalP3 = document.getElementById('finalP3');
+      const closingQuote = document.getElementById('closingQuote');
+      const finalActions = document.getElementById('finalActions');
+      const replayBtn = document.getElementById('replayBtn');
+      const readAllBtn = document.getElementById('readAllBtn');
+
+      // Modal elements
+      const allNotesModal = document.getElementById('allNotesModal');
+      const closeModalBtn = document.getElementById('closeModalBtn');
+      const modalList = document.getElementById('modalList');
+
+      // State
+      let currentIndex = 0;
+      let isTransitioning = false;
+      let isTyping = false;
+      let autoPlayEnabled = true;
+      let soundEnabled = false;
+      let typingTimerId = null;
+      let readingRafId = null;
+      let readingStartTime = 0;
+      let readingDuration = 5200;
+      let charSpans = [];
+      let charIndex = 0;
+      let audioCtx = null;
+
+      const prefersReducedMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      if (prefersReducedMotion) {
+        document.body.classList.add('reduced-motion');
+      }
+
+      // Soft Web Audio API chime synthesizer (optional & zero external audio files)
+      function playSoftChime(freqBase) {
+        if (!soundEnabled) return;
+        try {
+          if (!audioCtx) {
+            const AudioContextClass = window.AudioContext || window.webkitAudioContext;
+            if (!AudioContextClass) return;
+            audioCtx = new AudioContextClass();
+          }
+          if (audioCtx.state === 'suspended') {
+            audioCtx.resume();
+          }
+          const now = audioCtx.currentTime;
+          const osc = audioCtx.createOscillator();
+          const gain = audioCtx.createGain();
+          osc.type = 'sine';
+          osc.frequency.setValueAtTime(freqBase || 396, now);
+          osc.frequency.exponentialRampToValueAtTime((freqBase || 396) * 1.25, now + 1.4);
+
+          gain.gain.setValueAtTime(0.0001, now);
+          gain.gain.linearRampToValueAtTime(0.035, now + 0.12);
+          gain.gain.exponentialRampToValueAtTime(0.0001, now + 1.6);
+
+          osc.connect(gain);
+          gain.connect(audioCtx.destination);
+          osc.start(now);
+          osc.stop(now + 1.65);
+        } catch (err) {
+          // Ignore audio errors on restricted devices
+        }
+      }
+
+      // Build progress dots & modal content
+      function initUI() {
+        dotsRow.innerHTML = '';
+        MESSAGES.forEach((_, idx) => {
+          const dot = document.createElement('button');
+          dot.type = 'button';
+          dot.className = 'progress-dot';
+          dot.setAttribute('aria-label', 'Go to message ' + (idx + 1));
+          dot.addEventListener('click', () => {
+            if (isTransitioning || idx === currentIndex) return;
+            transitionToMessage(idx);
+          });
+          dotsRow.appendChild(dot);
+        });
+
+        modalList.innerHTML = '';
+        MESSAGES.forEach((msg, idx) => {
+          const item = document.createElement('div');
+          item.className = 'modal-note-item';
+          item.innerHTML =
+            '<div class="modal-note-num">Message ' + String(idx + 1).padStart(2, '0') + '</div>' +
+            '<div class="modal-note-text"></div>';
+          item.querySelector('.modal-note-text').textContent = msg;
+          modalList.appendChild(item);
+        });
+      }
+
+      function clearTimers() {
+        if (typingTimerId) {
+          clearTimeout(typingTimerId);
+          typingTimerId = null;
+        }
+        if (readingRafId) {
+          cancelAnimationFrame(readingRafId);
+          readingRafId = null;
+        }
+      }
+
+      function updateProgressHUD() {
+        const dots = dotsRow.querySelectorAll('.progress-dot');
+        dots.forEach((dot, idx) => {
+          dot.classList.toggle('active', idx === currentIndex);
+          dot.classList.toggle('completed', idx < currentIndex);
+        });
+
+        const remaining = MESSAGES.length - 1 - currentIndex;
+        const remainingText =
+          remaining === 0
+            ? 'Final message next'
+            : remaining === 1
+            ? '1 message remaining'
+            : remaining + ' messages remaining';
+        progressText.textContent = (currentIndex + 1) + ' of ' + MESSAGES.length + ' · ' + remainingText;
+
+        prevBtn.disabled = currentIndex === 0;
+        nextBtnText.textContent = currentIndex === MESSAGES.length - 1 ? 'Continue' : 'Next';
+      }
+
+      // Render message with smooth character-by-character typing reveal
+      function renderMessage(index) {
+        clearTimers();
+        currentIndex = index;
+        updateProgressHUD();
+
+        const text = MESSAGES[index];
+        messageBadge.textContent = 'Note for Insha · ' + String(index + 1).padStart(2, '0');
+        readingTimerFill.style.width = '0%';
+
+        // Build pre-positioned character spans so words never jump across lines mid-typing
+        typedContainer.innerHTML = '';
+        charSpans = [];
+        charIndex = 0;
+
+        const words = text.split(' ');
+        words.forEach((word, wIdx) => {
+          const wordSpan = document.createElement('span');
+          wordSpan.style.display = 'inline-block';
+          wordSpan.style.whiteSpace = 'nowrap';
+
+          for (let i = 0; i < word.length; i++) {
+            const ch = document.createElement('span');
+            ch.className = 'char-token';
+            ch.textContent = word[i];
+            wordSpan.appendChild(ch);
+            charSpans.push(ch);
+          }
+
+          typedContainer.appendChild(wordSpan);
+
+          if (wIdx < words.length - 1) {
+            const spaceSpan = document.createElement('span');
+            spaceSpan.className = 'char-token';
+            spaceSpan.textContent = ' ';
+            typedContainer.appendChild(spaceSpan);
+            charSpans.push(spaceSpan);
+          }
+        });
+
+        if (prefersReducedMotion || document.body.classList.contains('reduced-motion')) {
+          revealAllCharactersImmediately();
+          return;
+        }
+
+        isTyping = true;
+        typingCursor.classList.remove('done');
+
+        // Adaptive typing speed so longer messages remain engaging and comfortable
+        const baseDelay = text.length > 140 ? 22 : text.length > 90 ? 26 : 30;
+
+        function stepType() {
+          if (charIndex < charSpans.length) {
+            charSpans[charIndex].classList.add('revealed');
+            const currentChar = charSpans[charIndex].textContent;
+            charIndex++;
+
+            let extraPause = 0;
+            if (currentChar === '.' || currentChar === '?' || currentChar === '!') {
+              extraPause = 210;
+            } else if (currentChar === ',') {
+              extraPause = 95;
+            }
+
+            typingTimerId = setTimeout(stepType, baseDelay + extraPause);
+          } else {
+            finishTypingPhase();
+          }
+        }
+
+        typingTimerId = setTimeout(stepType, 260);
+      }
+
+      function revealAllCharactersImmediately() {
+        clearTimers();
+        charSpans.forEach((sp) => sp.classList.add('revealed'));
+        charIndex = charSpans.length;
+        finishTypingPhase();
+      }
+
+      function finishTypingPhase() {
+        isTyping = false;
+        typingCursor.classList.add('done');
+
+        // Calculate comfortable reading hold time after typing finishes (4.8s to 6.8s)
+        const textLen = MESSAGES[currentIndex].length;
+        readingDuration = Math.min(6800, Math.max(4800, textLen * 34));
+        readingStartTime = performance.now();
+
+        function tickReadingBar(now) {
+          if (!autoPlayEnabled) {
+            readingTimerFill.style.width = '0%';
+            return;
+          }
+          const elapsed = now - readingStartTime;
+          const pct = Math.min(100, (elapsed / readingDuration) * 100);
+          readingTimerFill.style.width = pct + '%';
+
+          if (elapsed < readingDuration) {
+            readingRafId = requestAnimationFrame(tickReadingBar);
+          } else {
+            advanceNext();
+          }
+        }
+
+        if (autoPlayEnabled) {
+          readingRafId = requestAnimationFrame(tickReadingBar);
+        }
+      }
+
+      function transitionToMessage(nextIndex) {
+        if (isTransitioning) return;
+        isTransitioning = true;
+        clearTimers();
+        playSoftChime(380 + (nextIndex % 5) * 28);
+
+        // Smoothly fade out current message
+        animWrapper.className = 'anim-wrapper anim-exit';
+
+        setTimeout(() => {
+          const entranceVariant = ENTRANCE_VARIANTS[nextIndex % ENTRANCE_VARIANTS.length];
+          animWrapper.className = 'anim-wrapper ' + entranceVariant;
+          renderMessage(nextIndex);
+
+          // Force reflow then animate in
+          void animWrapper.offsetWidth;
+          animWrapper.className = 'anim-wrapper anim-active';
+
+          setTimeout(() => {
+            isTransitioning = false;
+          }, 720);
+        }, 680);
+      }
+
+      function transitionToFinalScreen() {
+        if (isTransitioning) return;
+        isTransitioning = true;
+        clearTimers();
+        playSoftChime(528);
+
+        animWrapper.className = 'anim-wrapper anim-exit';
+
+        setTimeout(() => {
+          messageScreen.classList.add('hidden');
+          document.body.classList.add('final-dimmed');
+          finalScreen.classList.remove('hidden');
+
+          // Reset final screen states before cascading reveal
+          finalCard.classList.remove('revealed');
+          [finalP1, finalP2, finalP3, closingQuote, finalActions].forEach((el) => el.classList.remove('show'));
+
+          setTimeout(() => {
+            finalCard.classList.add('revealed');
+          }, 120);
+
+          setTimeout(() => finalP1.classList.add('show'), 700);
+          setTimeout(() => finalP2.classList.add('show'), 1850);
+          setTimeout(() => finalP3.classList.add('show'), 3000);
+          setTimeout(() => closingQuote.classList.add('show'), 4200);
+          setTimeout(() => {
+            finalActions.classList.add('show');
+            isTransitioning = false;
+          }, 5100);
+        }, 720);
+      }
+
+      function advanceNext() {
+        if (isTransitioning) return;
+        if (currentIndex < MESSAGES.length - 1) {
+          transitionToMessage(currentIndex + 1);
+        } else {
+          transitionToFinalScreen();
+        }
+      }
+
+      function goPrevious() {
+        if (isTransitioning || currentIndex <= 0) return;
+        transitionToMessage(currentIndex - 1);
+      }
+
+      // Event Listeners
+      openBtn.addEventListener('click', () => {
+        if (isTransitioning) return;
+        isTransitioning = true;
+        playSoftChime(432);
+
+        welcomeScreen.style.opacity = '0';
+        welcomeScreen.style.transform = 'translateY(-16px) scale(0.98)';
+        welcomeScreen.style.filter = 'blur(10px)';
+
+        setTimeout(() => {
+          welcomeScreen.classList.add('hidden');
+          welcomeScreen.style.opacity = '';
+          welcomeScreen.style.transform = '';
+          welcomeScreen.style.filter = '';
+
+          messageScreen.classList.remove('hidden');
+          animWrapper.className = 'anim-wrapper anim-fade-blur-enter';
+          renderMessage(0);
+
+          void animWrapper.offsetWidth;
+          animWrapper.className = 'anim-wrapper anim-active';
+
+          setTimeout(() => {
+            isTransitioning = false;
+          }, 720);
+        }, 750);
+      });
+
+      // Clicking the message card while typing completes typing immediately; if already typed, advances
+      messageCard.addEventListener('click', () => {
+        if (isTransitioning) return;
+        if (isTyping) {
+          revealAllCharactersImmediately();
+        }
+      });
+
+      nextBtn.addEventListener('click', () => {
+        if (isTransitioning) return;
+        advanceNext();
+      });
+
+      prevBtn.addEventListener('click', () => {
+        goPrevious();
+      });
+
+      autoPlayBtn.addEventListener('click', () => {
+        autoPlayEnabled = !autoPlayEnabled;
+        autoPlayBtn.classList.toggle('active', autoPlayEnabled);
+        autoPlayBtn.setAttribute('aria-pressed', String(autoPlayEnabled));
+        autoPlayLabel.textContent = autoPlayEnabled ? 'Auto: On' : 'Auto: Paused';
+
+        if (!autoPlayEnabled) {
+          if (readingRafId) {
+            cancelAnimationFrame(readingRafId);
+            readingRafId = null;
+          }
+          readingTimerFill.style.width = '0%';
+        } else if (!isTyping && !messageScreen.classList.contains('hidden')) {
+          finishTypingPhase();
+        }
+      });
+
+      soundToggleBtn.addEventListener('click', () => {
+        soundEnabled = !soundEnabled;
+        soundToggleBtn.classList.toggle('active', soundEnabled);
+        soundToggleBtn.setAttribute('aria-pressed', String(soundEnabled));
+        soundToggleLabel.textContent = soundEnabled ? 'Chime: On' : 'Chime: Off';
+        if (soundEnabled) {
+          playSoftChime(440);
+        }
+      });
+
+      replayBtn.addEventListener('click', () => {
+        if (isTransitioning) return;
+        isTransitioning = true;
+        document.body.classList.remove('final-dimmed');
+        finalCard.classList.remove('revealed');
+
+        setTimeout(() => {
+          finalScreen.classList.add('hidden');
+          messageScreen.classList.remove('hidden');
+          animWrapper.className = 'anim-wrapper anim-fade-blur-enter';
+          renderMessage(0);
+
+          void animWrapper.offsetWidth;
+          animWrapper.className = 'anim-wrapper anim-active';
+
+          setTimeout(() => {
+            isTransitioning = false;
+          }, 720);
+        }, 650);
+      });
+
+      readAllBtn.addEventListener('click', () => {
+        allNotesModal.classList.add('open');
+      });
+
+      closeModalBtn.addEventListener('click', () => {
+        allNotesModal.classList.remove('open');
+      });
+
+      allNotesModal.addEventListener('click', (e) => {
+        if (e.target === allNotesModal) {
+          allNotesModal.classList.remove('open');
+        }
+      });
+
+      // Keyboard navigation
+      window.addEventListener('keydown', (e) => {
+        if (allNotesModal.classList.contains('open')) {
+          if (e.key === 'Escape') allNotesModal.classList.remove('open');
+          return;
+        }
+        if (!welcomeScreen.classList.contains('hidden')) {
+          if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            openBtn.click();
+          }
+          return;
+        }
+        if (!messageScreen.classList.contains('hidden')) {
+          if (e.key === 'ArrowRight' || e.key === ' ') {
+            e.preventDefault();
+            if (isTyping) {
+              revealAllCharactersImmediately();
+            } else {
+              advanceNext();
+            }
+          } else if (e.key === 'ArrowLeft') {
+            e.preventDefault();
+            goPrevious();
+          }
+        }
+      });
+
+      // Touch swipe navigation on mobile
+      let touchStartX = 0;
+      let touchStartY = 0;
+      window.addEventListener('touchstart', (e) => {
+        if (e.touches && e.touches.length === 1) {
+          touchStartX = e.touches[0].clientX;
+          touchStartY = e.touches[0].clientY;
+        }
+      }, { passive: true });
+
+      window.addEventListener('touchend', (e) => {
+        if (messageScreen.classList.contains('hidden') || allNotesModal.classList.contains('open')) return;
+        if (e.changedTouches && e.changedTouches.length === 1) {
+          const dx = e.changedTouches[0].clientX - touchStartX;
+          const dy = e.changedTouches[0].clientY - touchStartY;
+          if (Math.abs(dx) > 55 && Math.abs(dx) > Math.abs(dy) * 1.5) {
+            if (dx < 0) {
+              advanceNext();
+            } else {
+              goPrevious();
+            }
+          }
+        }
+      }, { passive: true });
+
+      // Live Interactive Aurora Ribbons, Starlight, Shooting Stars & Firefly Bokeh Canvas
+      const canvas = document.getElementById('particleCanvas');
+      const ctx = canvas.getContext('2d');
+      let stars = [];
+      let fireflies = [];
+      let shootingStars = [];
+      let width = 0;
+      let height = 0;
+      let timeTick = 0;
+      let pointerX = -1000;
+      let pointerY = -1000;
+
+      window.addEventListener('mousemove', (e) => {
+        pointerX = e.clientX;
+        pointerY = e.clientY;
+      }, { passive: true });
+
+      window.addEventListener('touchmove', (e) => {
+        if (e.touches && e.touches.length > 0) {
+          pointerX = e.touches[0].clientX;
+          pointerY = e.touches[0].clientY;
+        }
+      }, { passive: true });
+
+      function resizeCanvas() {
+        width = window.innerWidth;
+        height = window.innerHeight;
+        const dpr = Math.min(window.devicePixelRatio || 1, 2);
+        canvas.width = width * dpr;
+        canvas.height = height * dpr;
+        ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+        createSceneElements();
+      }
+
+      function createSceneElements() {
+        // 1. Twinkling background stars
+        const starCount = Math.min(90, Math.max(40, Math.floor((width * height) / 14000)));
+        stars = [];
+        for (let i = 0; i < starCount; i++) {
+          stars.push({
+            x: Math.random() * width,
+            y: Math.random() * height * 0.85,
+            radius: Math.random() * 1.4 + 0.4,
+            baseAlpha: Math.random() * 0.55 + 0.2,
+            phase: Math.random() * Math.PI * 2,
+            speed: Math.random() * 0.025 + 0.008
+          });
+        }
+
+        // 2. Warm glowing firefly / bokeh orbs
+        const fireflyCount = Math.min(32, Math.max(16, Math.floor((width * height) / 36000)));
+        fireflies = [];
+        const bokehPalettes = [
+          { r: 45, g: 212, b: 191 },  // luminous aqua-teal
+          { r: 56, g: 189, b: 248 },  // sky cyan
+          { r: 251, g: 191, b: 36 },  // warm golden firefly
+          { r: 192, g: 132, b: 252 }  // soft amethyst
+        ];
+        for (let i = 0; i < fireflyCount; i++) {
+          const col = bokehPalettes[i % bokehPalettes.length];
+          fireflies.push({
+            x: Math.random() * width,
+            y: Math.random() * height,
+            radius: Math.random() * 18 + 6,
+            coreRadius: Math.random() * 2.2 + 1,
+            vx: (Math.random() - 0.5) * 0.35,
+            vy: -Math.random() * 0.4 - 0.12,
+            alpha: Math.random() * 0.38 + 0.16,
+            phase: Math.random() * Math.PI * 2,
+            color: col
+          });
+        }
+      }
+
+      function spawnShootingStar() {
+        if (shootingStars.length >= 2) return;
+        const startX = Math.random() * width * 0.8 + width * 0.1;
+        const startY = Math.random() * height * 0.35;
+        const angle = Math.PI * (0.18 + Math.random() * 0.12);
+        const speed = 7 + Math.random() * 5;
+        shootingStars.push({
+          x: startX,
+          y: startY,
+          vx: Math.cos(angle) * speed,
+          vy: Math.sin(angle) * speed,
+          length: 85 + Math.random() * 55,
+          life: 1.0,
+          decay: 0.014 + Math.random() * 0.008
+        });
+      }
+
+      function drawAuroraWaves(isReduced) {
+        const waveConfigs = [
+          {
+            yBase: height * 0.28,
+            amp1: 38,
+            amp2: 22,
+            speed: 0.008,
+            colorTop: 'rgba(45, 212, 191, 0.13)',
+            colorMid: 'rgba(56, 189, 248, 0.06)',
+            colorBot: 'rgba(56, 189, 248, 0)'
+          },
+          {
+            yBase: height * 0.52,
+            amp1: 45,
+            amp2: 28,
+            speed: -0.006,
+            colorTop: 'rgba(192, 132, 252, 0.11)',
+            colorMid: 'rgba(251, 191, 36, 0.05)',
+            colorBot: 'rgba(192, 132, 252, 0)'
+          }
+        ];
+
+        for (let w = 0; w < waveConfigs.length; w++) {
+          const cfg = waveConfigs[w];
+          ctx.beginPath();
+          ctx.moveTo(0, height);
+          const step = Math.max(24, Math.floor(width / 28));
+          for (let x = 0; x <= width + step; x += step) {
+            const t = isReduced ? 1 : timeTick * cfg.speed;
+            const y =
+              cfg.yBase +
+              Math.sin(x * 0.0035 + t) * cfg.amp1 +
+              Math.cos(x * 0.007 - t * 1.3) * cfg.amp2;
+            ctx.lineTo(x, y);
+          }
+          ctx.lineTo(width, height);
+          ctx.closePath();
+
+          const grad = ctx.createLinearGradient(0, cfg.yBase - 60, 0, height * 0.95);
+          grad.addColorStop(0, cfg.colorTop);
+          grad.addColorStop(0.5, cfg.colorMid);
+          grad.addColorStop(1, cfg.colorBot);
+          ctx.fillStyle = grad;
+          ctx.fill();
+        }
+      }
+
+      function animateParticles() {
+        ctx.clearRect(0, 0, width, height);
+        const isReduced = prefersReducedMotion || document.body.classList.contains('reduced-motion');
+        timeTick += 1;
+
+        // 1. Draw live flowing aurora ribbons
+        drawAuroraWaves(isReduced);
+
+        // 2. Draw twinkling stars
+        for (let i = 0; i < stars.length; i++) {
+          const st = stars[i];
+          if (!isReduced) {
+            st.phase += st.speed;
+          }
+          const twinkle = st.baseAlpha * (0.55 + 0.45 * Math.sin(st.phase));
+          ctx.beginPath();
+          ctx.arc(st.x, st.y, st.radius, 0, Math.PI * 2);
+          ctx.fillStyle = 'rgba(241, 245, 249, ' + twinkle.toFixed(3) + ')';
+          ctx.fill();
+        }
+
+        // 3. Draw warm glowing firefly bokeh orbs
+        for (let i = 0; i < fireflies.length; i++) {
+          const p = fireflies[i];
+          if (!isReduced) {
+            p.x += p.vx + Math.sin(timeTick * 0.01 + p.phase) * 0.15;
+            p.y += p.vy;
+            p.phase += 0.016;
+
+            // Gentle interactive breeze away from pointer
+            const dx = p.x - pointerX;
+            const dy = p.y - pointerY;
+            const distSq = dx * dx + dy * dy;
+            if (distSq < 18000 && distSq > 1) {
+              const dist = Math.sqrt(distSq);
+              p.x += (dx / dist) * 0.7;
+              p.y += (dy / dist) * 0.7;
+            }
+
+            if (p.y < -30) p.y = height + 30;
+            if (p.x < -30) p.x = width + 30;
+            if (p.x > width + 30) p.x = -30;
+          }
+
+          const pulse = 0.7 + 0.3 * Math.sin(p.phase);
+          const glowAlpha = (p.alpha * pulse).toFixed(3);
+          const { r, g, b } = p.color;
+
+          // Soft outer bokeh halo
+          const radGrad = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, p.radius);
+          radGrad.addColorStop(0, 'rgba(' + r + ',' + g + ',' + b + ',' + glowAlpha + ')');
+          radGrad.addColorStop(0.5, 'rgba(' + r + ',' + g + ',' + b + ',' + (p.alpha * pulse * 0.35).toFixed(3) + ')');
+          radGrad.addColorStop(1, 'rgba(' + r + ',' + g + ',' + b + ', 0)');
+
+          ctx.beginPath();
+          ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
+          ctx.fillStyle = radGrad;
+          ctx.fill();
+
+          // Bright firefly core
+          ctx.beginPath();
+          ctx.arc(p.x, p.y, p.coreRadius, 0, Math.PI * 2);
+          ctx.fillStyle = 'rgba(255, 255, 255, ' + Math.min(0.9, p.alpha * pulse * 1.8).toFixed(3) + ')';
+          ctx.fill();
+        }
+
+        // 4. Occasional shooting stars across the night sky
+        if (!isReduced) {
+          if (Math.random() < 0.007) {
+            spawnShootingStar();
+          }
+          for (let i = shootingStars.length - 1; i >= 0; i--) {
+            const ss = shootingStars[i];
+            ss.x += ss.vx;
+            ss.y += ss.vy;
+            ss.life -= ss.decay;
+
+            if (ss.life <= 0 || ss.x > width + 100 || ss.y > height + 100) {
+              shootingStars.splice(i, 1);
+              continue;
+            }
+
+            const tailX = ss.x - (ss.vx / 8) * ss.length;
+            const tailY = ss.y - (ss.vy / 8) * ss.length;
+            const trailGrad = ctx.createLinearGradient(ss.x, ss.y, tailX, tailY);
+            trailGrad.addColorStop(0, 'rgba(255, 255, 255, ' + ss.life.toFixed(3) + ')');
+            trailGrad.addColorStop(0.3, 'rgba(56, 189, 248, ' + (ss.life * 0.6).toFixed(3) + ')');
+            trailGrad.addColorStop(1, 'rgba(56, 189, 248, 0)');
+
+            ctx.beginPath();
+            ctx.moveTo(ss.x, ss.y);
+            ctx.lineTo(tailX, tailY);
+            ctx.strokeStyle = trailGrad;
+            ctx.lineWidth = 2;
+            ctx.lineCap = 'round';
+            ctx.stroke();
+          }
+        }
+
+        if (!isReduced) {
+          requestAnimationFrame(animateParticles);
+        }
+      }
+
+      window.addEventListener('resize', resizeCanvas);
+      initUI();
+      resizeCanvas();
+      animateParticles();
+    })();
+  </script>
+</body>
+</html>
